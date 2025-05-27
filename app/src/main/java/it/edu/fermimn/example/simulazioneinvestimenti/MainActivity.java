@@ -14,9 +14,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.google.android.material.slider.Slider;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final DecimalFormat decimalFormatter = new DecimalFormat("##.##");
@@ -47,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
         TextView textViewUtile = findViewById(R.id.textViewUtile);
         TextView textViewRendimentoTotale = findViewById(R.id.textViewRendimentoTotale);
 
+        LineChart lineChart = findViewById(R.id.chart);
+        List<Entry> entries = new ArrayList<>();
+        LineDataSet dataSet = new LineDataSet(entries, "Capitale");
+
         Button btnCalcola = findViewById(R.id.btnCalcola);
         btnCalcola.setOnClickListener(view -> {
             double rendimentoTotale = capitaleValue * Math.pow(1 + tassoInteresseValue, tempoValue);
@@ -62,7 +72,19 @@ public class MainActivity extends AppCompatActivity {
             textViewRendimentoTotale.setText(decimalFormatter.format(rendimentoTotale));
             textViewRendimentoTotale.setVisibility(View.VISIBLE);
             textViewLabelRendimentoTotale.setVisibility(View.VISIBLE);
+
+            entries.clear();
+
+            for (int i = 0; i <= tempoValue; i++) {
+                entries.add(new Entry(i, (float) (capitaleValue * Math.pow(1 + tassoInteresseValue, i))));
+            }
+
+            lineChart.setData(new LineData(dataSet));
+            lineChart.invalidate();
+
+            lineChart.setVisibility(View.VISIBLE);
         });
+
     }
 
     private void setupSlidersListener() {

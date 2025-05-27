@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">SimulazioneInvestimenti</string>
+    <string name="title">Simulatore di investimenti</string>
+    <string name="textViewCapitale">Capitale:</string>
+    <string name="editTextCapitale">Capitale</string>
+    <string name="textViewTempo">Tempo:</string>
+    <string name="editTextTempo">Tempo</string>
+    <string name="textViewTassoInteresse">Tasso Interesse:</string>
+    <string name="editTextTassoInteresse">Interesse</string>
+    <string name="TextViewPeriodicitaInteresse">Periodicità \ninteresse:</string>
+    <string name="btnCalcola">CALCOLA</string>
+    <string name="textViewCapitaleInvestito">Capitale investito:</string>
+    <string name="textViewUtile">Utile:</string>
+    <string name="textViewRendimentoTotale">Rendimento totale:</string>
+    <string-array name="mensilita">
+        <item>Annuale</item>
+        <item>Mensile</item>
+    </string-array>
+</resources>

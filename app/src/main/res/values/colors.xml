@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="primaryBackground">#80A5BC</color>
+    <color name="secondaryBackground">#374E6E</color>
+    <color name="textColor">#DDE6ED</color>
+    <color name="sliderThumbColor">#27374D</color>
+    <color name="sliderTrackColor">#A3BAD5</color>
+</resources>

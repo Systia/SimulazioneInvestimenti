@@ -11,9 +11,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
         android:background="@color/primaryBackground"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="10dp">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -229,15 +229,16 @@
         </FrameLayout>
 
         <LinearLayout
+            android:id="@+id/capitaleLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:layout_marginBottom="20dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
-                android:id="@+id/textViewLabelCapitale"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center"
@@ -246,8 +247,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/textColor"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewCapitaleInvestito"
@@ -255,23 +255,24 @@
                 android:layout_height="35dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:background="@color/secondaryBackground"
                 android:textAlignment="center"
                 android:textColor="@color/textColor"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/utileLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
-                android:id="@+id/textViewLabelUtile"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center"
@@ -280,8 +281,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/textColor"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewUtile"
@@ -289,23 +289,24 @@
                 android:layout_height="35dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:background="@color/secondaryBackground"
                 android:textAlignment="center"
                 android:textColor="@color/textColor"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/rendimentoTotaleLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
-                android:id="@+id/textViewLabelRendimentoTotale"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center"
@@ -314,8 +315,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/textColor"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewRendimentoTotale"
@@ -323,24 +323,25 @@
                 android:layout_height="35dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:background="@color/secondaryBackground"
                 android:textAlignment="center"
                 android:textColor="@color/textColor"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <FrameLayout
+            android:id="@+id/chartLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:visibility="gone">
 
             <com.github.mikephil.charting.charts.LineChart
-                android:visibility="gone"
                 android:id="@+id/chart"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"/>
+                android:layout_height="200dp" />
         </FrameLayout>
     </LinearLayout>
 </ScrollView>

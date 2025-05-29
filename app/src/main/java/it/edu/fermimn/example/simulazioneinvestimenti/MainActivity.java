@@ -6,9 +6,11 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -42,49 +44,53 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        if (savedInstanceState != null) {
+            capitaleValue = savedInstanceState.getInt("capitaleValue");
+            tempoValue = savedInstanceState.getInt("tempoValue");
+            tassoInteresseValue = savedInstanceState.getFloat("tassoInteresseValue");
+        }
+
         setupSlidersListener();
         setupEditTextsListener();
 
-        TextView textViewLabelCapitale = findViewById(R.id.textViewLabelCapitale);
-        TextView textViewLabelUtile = findViewById(R.id.textViewLabelUtile);
-        TextView textViewLabelRendimentoTotale = findViewById(R.id.textViewLabelRendimentoTotale);
-
-        TextView textViewCapitale = findViewById(R.id.textViewCapitaleInvestito);
-        TextView textViewUtile = findViewById(R.id.textViewUtile);
-        TextView textViewRendimentoTotale = findViewById(R.id.textViewRendimentoTotale);
-
-        LineChart lineChart = findViewById(R.id.chart);
         List<Entry> entries = new ArrayList<>();
         LineDataSet dataSet = new LineDataSet(entries, "Capitale");
 
         Button btnCalcola = findViewById(R.id.btnCalcola);
         btnCalcola.setOnClickListener(view -> {
-            double rendimentoTotale = capitaleValue * Math.pow(1 + tassoInteresseValue, tempoValue);
+            int tempoMult = ((Spinner) findViewById(R.id.spinner)).getSelectedItem().toString().equals("Annuale") ? 1 : 12;
+            double rendimentoTotale = capitaleValue * Math.pow(1 + tassoInteresseValue, tempoValue * tempoMult);
 
-            textViewCapitale.setText(String.valueOf(capitaleValue));
-            textViewCapitale.setVisibility(View.VISIBLE);
-            textViewLabelCapitale.setVisibility(View.VISIBLE);
+            findViewById(R.id.capitaleLayout).setVisibility(View.VISIBLE);
+            ((TextView) findViewById(R.id.textViewCapitaleInvestito)).setText(String.valueOf(capitaleValue));
 
-            textViewUtile.setText(decimalFormatter.format(rendimentoTotale - capitaleValue));
-            textViewUtile.setVisibility(View.VISIBLE);
-            textViewLabelUtile.setVisibility(View.VISIBLE);
+            findViewById(R.id.utileLayout).setVisibility(View.VISIBLE);
+            ((TextView) findViewById(R.id.textViewUtile)).setText(decimalFormatter.format(rendimentoTotale - capitaleValue));
 
-            textViewRendimentoTotale.setText(decimalFormatter.format(rendimentoTotale));
-            textViewRendimentoTotale.setVisibility(View.VISIBLE);
-            textViewLabelRendimentoTotale.setVisibility(View.VISIBLE);
+            findViewById(R.id.rendimentoTotaleLayout).setVisibility(View.VISIBLE);
+            ((TextView) findViewById(R.id.textViewRendimentoTotale)).setText(decimalFormatter.format(rendimentoTotale));
 
             entries.clear();
 
             for (int i = 0; i <= tempoValue; i++) {
-                entries.add(new Entry(i, (float) (capitaleValue * Math.pow(1 + tassoInteresseValue, i))));
+                entries.add(new Entry(i, (float) (capitaleValue * Math.pow(1 + tassoInteresseValue, i * tempoMult))));
             }
 
+            dataSet.setValues(entries);
+            LineChart lineChart = findViewById(R.id.chart);
             lineChart.setData(new LineData(dataSet));
             lineChart.invalidate();
-
-            lineChart.setVisibility(View.VISIBLE);
+            findViewById(R.id.chartLayout).setVisibility(View.VISIBLE);
         });
+    }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("capitaleValue", capitaleValue);
+        outState.putInt("tempoValue", tempoValue);
+        outState.putFloat("tassoInteresseValue", tassoInteresseValue);
     }
 
     private void setupSlidersListener() {
